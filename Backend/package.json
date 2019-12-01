@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Express & Node js Backend for API building",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krishnakantsalkar/E-Commerce-Project.git"
+  },
+  "author": "Krishnakant Salkar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krishnakantsalkar/E-Commerce-Project/issues"
+  },
+  "homepage": "https://github.com/krishnakantsalkar/E-Commerce-Project#readme",
+  "dependencies": {
+    "@hapi/joi": "^16.1.7",
+    "bcryptjs": "^2.4.3",
+    "config": "^3.2.4",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.12",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.3.1"
+  }
+}

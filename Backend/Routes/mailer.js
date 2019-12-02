@@ -13,10 +13,10 @@ Router.post("/mailer", async (req, res) => {
   if (!user) {
     return res.status(403).send({ message: "invalid emailID" });
   }
-  user.resetPasswordtoken = token;
+  user.resetPasswordToken = token;
   user.resetPasswordexpires = Date.now() + 3600000;
   let data = await user.save();
-
+  console.log(data);
   let transporter = mailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,

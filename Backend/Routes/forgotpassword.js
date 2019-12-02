@@ -1,16 +1,17 @@
 let express = require("express");
 let Router = express.Router();
-let users = require("../db/newUserSchema");
+let userDB = require("../db/newUserSchema");
 let bcrypt = require("bcryptjs");
 let crypto = require("crypto");
 let Joi = require("@hapi/joi");
 
 Router.post("/forgotPassword/:id", async (req, res) => {
   try {
-    let data = await users.findOne({
+    let data = await userDB.findOne({
       resetPasswordToken: req.params.id
       // resetPasswordExpires: { $gt: Date.now() }
     });
+    console.log(data);
     if (!data) {
       return res.status(404).send({ message: "Token not found" });
     }
@@ -18,11 +19,11 @@ Router.post("/forgotPassword/:id", async (req, res) => {
     if (error) {
       return res.status(403).send(error.details[0].message);
     }
-    console.log(user.UserLogin.userPassword);
-    console.log(req.body.UserLogin.userPassword);
-    let comparepassword = bcrypt.compare(
-      user.userLogin.userPassword,
-      req.body.userLogin.userPassword
+    // console.log(data.userLogin.userPassword);
+    // console.log(req.body.userLogin.userPassword);
+    let comparepassword = await bcrypt.compare(
+      req.body.userLogin.userPassword,
+      data.userLogin.userPassword
     );
     console.log(comparepassword);
     if (comparepassword) {
@@ -30,13 +31,13 @@ Router.post("/forgotPassword/:id", async (req, res) => {
         .status(403)
         .send({ message: "New password can't be Old Password" });
     }
-    let salt = bcrypt.genSalt(10);
-    users.userLogin.userPassword = await bcrypt.hash(
+    let salt = await bcrypt.genSalt(10);
+    data.userLogin.userPassword = await bcrypt.hash(
       req.body.userLogin.userPassword,
       salt
     );
-    users.userResetPasswordToken = undefined;
-    users.userResetPasswordExpires = undefined;
+    data.userResetPasswordToken = undefined;
+    data.userResetPasswordExpires = undefined;
     let newPassword = await data.save();
     res.send({ message: "Password Changed Successfully!", data: newPassword });
   } catch (ex) {

@@ -33,8 +33,9 @@ let products = require("./Routes/products");
 let mailer = require("./Routes/mailer");
 let forgot = require("./Routes/forgotpassword");
 let imageUpload = require("./Routes/fileUploads");
-let cart = require("./Routes/cart");
 let contact = require("./Routes/contact-us");
+let cart = require("./Routes/cart");
+let userCart = require("./Routes/userCart");
 
 //E-commerce Project Allowed Routes
 app.use("/api/users/", users);
@@ -45,8 +46,9 @@ app.use("/api/forgot/", forgot);
 app.use("/uploads", express.static(__dirname + "./uploads"));
 app.use("/api/file", imageUpload);
 app.use("/cartUploads", express.static(__dirname + "./uploads/cartUploads"));
-app.use("/api/cart", cart);
 app.use("/api/contact", contact);
+app.use("/api/cart", cart);
+app.use("/api/userCart", userCart);
 
 //Mongo DB connection
 mongoose

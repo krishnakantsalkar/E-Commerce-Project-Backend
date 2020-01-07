@@ -7,8 +7,10 @@ let port = process.env.PORT || 4500;
 process.env.NODE_CONFIG_DIR = "./config";
 let config = require("config");
 let path = require("path");
+let cors = require('cors')
 app.use(express.json());
 app.use(morgan("tiny"));
+app.use(cors());
 
 console.log(`production: ${process.env.NODE_ENV}`);
 console.log(`development: ${app.get("env")}`);

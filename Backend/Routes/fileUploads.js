@@ -37,6 +37,7 @@ Router.post("/fileUpload", fileStorage.single("image"), async (req, res) => {
     let data = new fileModel({
       image: port + "uploads/" + req.file.filename
     });
+    console.log(data);
     if (!data) {
       return res.status(403).send({ message: "File not found" });
     }
@@ -47,4 +48,12 @@ Router.post("/fileUpload", fileStorage.single("image"), async (req, res) => {
   }
 });
 
+Router.get("/getFiles", async (req, res) => {
+  try {
+    let getFilesData = await fileModel.find();
+    res.send(getFilesData);
+  } catch (ex) {
+    res.send(ex.message);
+  }
+});
 module.exports = Router;

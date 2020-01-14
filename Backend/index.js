@@ -7,7 +7,7 @@ let port = process.env.PORT || 4500;
 process.env.NODE_CONFIG_DIR = "./config";
 let config = require("config");
 let path = require("path");
-let cors = require('cors')
+let cors = require("cors");
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(cors());
@@ -45,7 +45,7 @@ app.use("/api/login/", login);
 app.use("/api/products", products);
 app.use("/api/", mailer);
 app.use("/api/forgot/", forgot);
-app.use("/uploads", express.static(__dirname + "./uploads"));
+app.use("/uploads", express.static("./uploads"));
 app.use("/api/file", imageUpload);
 app.use("/cartUploads", express.static(__dirname + "./uploads/cartUploads"));
 app.use("/api/contact", contact);

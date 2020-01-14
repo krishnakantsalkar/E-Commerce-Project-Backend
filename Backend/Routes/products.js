@@ -42,7 +42,7 @@ Router.post("/addProduct", async (req, res) => {
 // get products
 Router.get("/getProducts", async (req, res) => {
   let getProductsData = await products.find();
-  res.send({ message: "List of all Products", getProductsData });
+  res.send(getProductsData);
 });
 
 //get products by id

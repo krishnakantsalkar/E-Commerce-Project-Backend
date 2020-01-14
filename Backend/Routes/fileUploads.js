@@ -56,4 +56,16 @@ Router.get("/getFiles", async (req, res) => {
     res.send(ex.message);
   }
 });
+
+Router.get("/getFilesById/:id", async (req, res) => {
+  try {
+    let getFilesDataById = await fileModel.findById(req.params.id);
+    if (!getFilesDataById) {
+      return res.status(404).send({ message: " Id not found" });
+    }
+    res.send(getFilesDataById);
+  } catch (ex) {
+    res.send(ex.message);
+  }
+});
 module.exports = Router;

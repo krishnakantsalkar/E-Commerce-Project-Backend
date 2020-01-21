@@ -28,7 +28,7 @@ Router.post("/Logon", async (req, res) => {
   let token = newlogin.GenerateNewToken();
   res
     .header("x-auth-token", token)
-    .send({ message: "login successful", token: token });
+    .send({ message: "login successful", token: token, id: newlogin.id });
 });
 
 function ValidationError(error) {

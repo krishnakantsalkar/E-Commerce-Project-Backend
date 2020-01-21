@@ -15,6 +15,15 @@ Router.get("/users/", async (req, res) => {
   res.send(userID);
 });
 
+// get users by id
+Router.get("/userById/:id", async (req, res) => {
+  let userID = await users.findById(req.params.id);
+  if (!userID) {
+    return res.status(404).send({ message: " Id not found" });
+  }
+  res.send(userID);
+});
+
 Router.post("/Registration", async (req, res) => {
   let { error } = ValidationError(req.body);
   if (error) {

@@ -11,6 +11,7 @@ let product3SchemaData = new mongoose.Schema({
   id: { type: Number },
   name: { type: String, max: 20 },
   description: { type: String },
+  quantity: { type: Number },
   price: { type: Number },
   offerPrice: { type: Number },
   isAvailable: { type: Boolean },

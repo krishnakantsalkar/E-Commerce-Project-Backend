@@ -20,7 +20,10 @@ let newUserSchemaData = new mongoose.Schema({
 });
 
 newUserSchemaData.methods.GenerateNewToken = function() {
-  let token = jwt.sign({ _id: this._id }, config.get("Secret"));
+  let token = jwt.sign(
+    { _id: this._id, isAdmin: this.isAdmin },
+    config.get("Secret")
+  );
   return token;
 };
 let newUserSchema = mongoose.model("New Users", newUserSchemaData);

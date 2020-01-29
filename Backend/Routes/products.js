@@ -65,7 +65,7 @@ Router.delete("/deleteProductsbyID/:id", [auth, admin], async (req, res) => {
   if (!deleteProductsDatabyID) {
     return res.status(404).send({ message: "Id not found" });
   }
-  res.send("removed data");
+  res.send({ message: "removed data" });
 });
 
 //put ,udpdate product by id

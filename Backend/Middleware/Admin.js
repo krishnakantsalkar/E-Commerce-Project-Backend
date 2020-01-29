@@ -1,12 +1,10 @@
-let express = require("express");
-let db = require("../db/newUserSchema");
-async function Admin(req, res, next) {
-  let adminData = await db.findOne({ isAdmin: req.newUserSchema.isAdmin });
-  if (!adminData) {
+function Admin(req, res, next) {
+  if (req.newUserSchema.isAdmin) {
+    next();
+  } else {
     return res
       .status(403)
-      .send({ message: "Access Denied , You are not an Admin" });
+      .send({ message: "ACCESS DENIED. You are not Admin" });
   }
-  next();
 }
 module.exports = Admin;

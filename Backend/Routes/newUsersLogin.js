@@ -26,9 +26,12 @@ Router.post("/Logon", async (req, res) => {
     return res.status(403).send({ message: "invalid password" });
   }
   let token = newlogin.GenerateNewToken();
-  res
-    .header("x-auth-token", token)
-    .send({ message: "login successful", token: token, id: newlogin.id });
+  res.header("x-auth-token", token).send({
+    message: "login successful",
+    token: token,
+    id: newlogin.id,
+    admin: newlogin.isAdmin
+  });
 });
 
 function ValidationError(error) {
